@@ -169,6 +169,7 @@ function DownloadSession($sessionObject, $sessionSearchCount, $directory) {
             $metaData += "`r`nSession Title: " + $sessionObject.title;
             $metaData += "`r`nSession Description: " + $sessionObject.description;
             $metaData += "`r`nSession Time: " + $sessionObject.startDateTime;
+            $metaData += "`r`nLast update time: " + $sessionObject.lastUpdate;
 
             Out-File -FilePath $dataFile -InputObject $metaData -Encoding ASCII;
         }
