@@ -132,6 +132,7 @@ function DownloadSession($sessionObject, $sessionSearchCount, $directory) {
         $videoFile = "$directory\$code-$title\$code.mp4";
         $slideFile = "$directory\$code-$title\$code.pptx";
         $dataFile = "$directory\$code-$title\$code.txt";
+        $vttSubtitle = "$directory\$code-$title\$code.vtt";
 
         #Video download.
         if ($sessionObject.downloadVideoLink.Length -ne 0) {
@@ -176,6 +177,21 @@ function DownloadSession($sessionObject, $sessionSearchCount, $directory) {
         else {
             Write-Host "Data file exists: $dataFile"
         }
+
+        #subtitle download.
+        if ($sessionObject.captionFileLink.Length -ne 0) {
+            if (!(test-path $vttSubtitle)) {
+                Write-Host "Downloading subtitle for: $title ($code).";
+                Start-BitsTransfer -Source $sessionObject.captionFileLink -Destination $vttSubtitle;
+            }
+            else {
+                Write-Host "subtitle exist: $vttSubtitle"
+            }
+        }
+        else {
+            Write-Host "The session $title ($code) does not contain a subtitle."
+        }
+		
         Write-Host("`r`n");
         return $true;
     }
