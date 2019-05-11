@@ -2,7 +2,9 @@
 
 ([english summary](#English-Summary))
 
-這個Powershell的script用來下載Microsoft 2019 Build大會的所有影片以及資源。
+[部落格介紹-[tool]如何快速下載所有Microsoft Build 2019的Session影片、簡報等資源](https://blog.alantsai.net/posts/2019/05/tool-how-to-download-all-microsoft-build-2019-videos-slides-caption-for-offline-access)
+
+這個Powershell的script用來下載Microsoft Build 2019大會的所有影片以及資源。
 
 每一個下載下來的Session會包含(如果有提供的話):
 1. 影片 (*.mp4)
@@ -20,9 +22,10 @@
 ## 快速使用 (how to use)
 
 只需要clone或者下載這個專案:
-1. 開啓 powershell
-2. `cd` 進入 `src` 資料夾
-3. 執行：`.\Download-BuildResources.ps1 -directory .\Download` 將會下載所有已經公佈的session到當前目錄下的 `Download` 資料夾
+1. `git clone https://github.com/alantsai/mhat-ps-download-build2019.git` 或者 下載成zip：https://github.com/alantsai/mhat-ps-download-build2019/archive/master.zip
+2. 開啓 powershell
+3. `cd` 進入 `src` 資料夾
+4. 執行：`.\Download-BuildResources.ps1 -directory .\Download` 將會下載所有已經公佈的session到當前目錄下的 `Download` 資料夾
 
 > 如果Session内容已經下載過了，不會被重複下載
 
@@ -33,6 +36,9 @@
 - `-directory` - 決定要下載到那邊，預設是script的位置
 - `-sessionCodes` - 要下載的session，用逗點分割。例如：`-sessionCodes "CFS3006,BRK2006"`。預設是空，表示下載**全部**session
 
+> Session Code 可以從影片的右邊看到。
+> 詳細可以看：[部落格-[tool]如何快速下載所有Microsoft Build 2019的Session影片、簡報等資源#如何找到Session Code](https://blog.alantsai.net/posts/2019/05/tool-how-to-download-all-microsoft-build-2019-videos-slides-caption-for-offline-access#WizKMOutline_1557543714208891)
+
 ### 注意事項
 
 - 如果Session還沒有提供任何影片的鏈接，那麽會被直接忽略 - 不會建立任何資料夾
@@ -40,13 +46,13 @@
 
 ### 使用範例
 
-如果要下載全部的Session到當前的資料夾下面的Download
+如果要下載**全部**的Session到當前的資料夾下面的Download
 
 ```powershell
 .\Download-BuildResources.ps1 -directory .\Download
 ```
 
-如果要下載指定的Session到當前的資料夾下面的Download
+如果要下載**指定**的Session到當前的資料夾下面的Download
 
 ```powershell
 .\Download-BuildResources.ps1 -directory .\Download -sessionCodes "CFS3006,BRK2006"
@@ -54,7 +60,7 @@
 
 ## English Summary
 
-This Powershell script is used for downloading all available Microsoft 2019 Build videos and slides.
+This Powershell script is used for downloading all available Microsoft Build 2019 videos and slides.
 
 Each downloaded session will include (if available):
 1. video (*.mp4)
