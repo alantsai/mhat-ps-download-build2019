@@ -111,7 +111,7 @@ function CleanFilename($filename) {
 function DownloadSession($sessionObject, $sessionSearchCount, $directory) {
     if (($sessionObject.slideDeck.Length -ne 0) -or ($sessionObject.downloadVideoLink.Length -ne 0)) {
         $code = $sessionObject.sessionCode;
-        $title = $sessionObject.title;
+        $title = CleanFilename($sessionObject.title);
 
         if ($code.Length -eq 0) {
             $code = "NoCodeSession$sessionSearchCount"
@@ -123,15 +123,15 @@ function DownloadSession($sessionObject, $sessionSearchCount, $directory) {
         Write-Host("===== $title ($code) =====");
 
         #Create directory.
-        $folder = Join-Path -Path $directory -ChildPath $s.sessionCode;
+        $folder = Join-Path -Path $directory -ChildPath "$code-$title";
         if (-not (Test-Path $folder)) {
             Write-Host "Folder $folder) dosen't exist. Creating it..."  ;
             New-Item $folder -type directory | Out-Null;
         }
 
-        $videoFile = "$directory\$code\$code.mp4";
-        $slideFile = "$directory\$code\$code.pptx";
-        $dataFile = "$directory\$code\$code.txt";
+        $videoFile = "$directory\$code-$title\$code.mp4";
+        $slideFile = "$directory\$code-$title\$code.pptx";
+        $dataFile = "$directory\$code-$title\$code.txt";
 
         #Video download.
         if ($sessionObject.downloadVideoLink.Length -ne 0) {
